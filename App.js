@@ -12,6 +12,7 @@ import { createStore } from "redux";
 import AddEntry from "./src/Components/AddEntry";
 import EntryDetail from "./src/Components/EntryDetail";
 import History from "./src/Components/History";
+import Live from "./src/Components/Live";
 import reducer from "./src/reducers";
 import { purple, white } from "./src/utils/colors";
 
@@ -42,6 +43,16 @@ const RouteConfigs = {
         <FontAwesome name="plus-square" size={30} color={tintColor} />
       ),
       title: "Add Entry",
+    },
+  },
+  Live: {
+    component: Live,
+    name: "Live",
+    options: {
+      tabBarIcon: ({ tintColor }) => (
+        <Ionicons name="ios-speedometer" size={30} color={tintColor} />
+      ),
+      title: "Live",
     },
   },
 };
@@ -76,6 +87,7 @@ const TabNav = () => (
   <Tab.Navigator {...TabNavigatorConfig}>
     <Tab.Screen {...RouteConfigs["History"]} />
     <Tab.Screen {...RouteConfigs["AddEntry"]} />
+    <Tab.Screen {...RouteConfigs["Live"]} />
   </Tab.Navigator>
 );
 
