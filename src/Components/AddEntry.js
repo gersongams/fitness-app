@@ -13,8 +13,10 @@ import { addEntry } from "../actions.js";
 import { removeEntry, submitEntry } from "../utils/api";
 import { purple, white } from "../utils/colors";
 import {
+  clearLocalNotification,
   getDailyReminderValue,
   getMetricMetaInfo,
+  setLocalNotification,
   timeToString,
 } from "../utils/helpers";
 import CustomSlider from "./CustomSlider";
@@ -135,6 +137,7 @@ const AddEntry = ({ navigation }) => {
     submitEntry({ key, entry });
 
     // Clearn local notification
+    clearLocalNotification().then(setLocalNotification);
   };
 
   const reset = () => {

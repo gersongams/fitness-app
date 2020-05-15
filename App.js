@@ -4,7 +4,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Constants from "expo-constants";
-import React from "react";
+import React, { useEffect } from "react";
 import { Platform, StatusBar, View } from "react-native";
 import "react-native-gesture-handler";
 import { Provider } from "react-redux";
@@ -15,6 +15,7 @@ import History from "./src/Components/History";
 import Live from "./src/Components/Live";
 import reducer from "./src/reducers";
 import { purple, white } from "./src/utils/colors";
+import { setLocalNotification } from "./src/utils/helpers";
 
 function UdaciStatusBar({ backgroundColor, ...props }) {
   return (
@@ -122,20 +123,20 @@ const MainNav = () => (
   </Stack.Navigator>
 );
 
-const App = () => (
-  <Provider store={createStore(reducer)}>
-    <View style={{ flex: 1 }}>
-      <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
-      <NavigationContainer>
-        <MainNav />
-      </NavigationContainer>
-      {/* <Tabs /> */}
-      {/* <View style={{ marginTop: 20 }} /> */}
-      {/* <History /> */}
-      {/* <AddEntry /> */}
-      {/* </View> */}
-    </View>
-  </Provider>
-);
+const App = () => {
+  useEffect(() => {
+    setLocalNotification();
+  }, []);
+  return (
+    <Provider store={createStore(reducer)}>
+      <View style={{ flex: 1 }}>
+        <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
+        <NavigationContainer>
+          <MainNav />
+        </NavigationContainer>
+      </View>
+    </Provider>
+  );
+};
 
 export default App;
